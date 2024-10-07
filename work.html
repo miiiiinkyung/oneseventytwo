@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works - oneseventytwo</title>
+
+    <style type="text/css">
+        @font-face {
+            font-family: 'SUIT-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'SUIT-Regular', sans-serif;
+            background-color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            color: black;
+            white-space: nowrap;
+        }
+
+        .logo a {
+            font-size: 24px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .id {
+            position: absolute;
+            font-size: 60px;
+            margin-left: 100px;
+            margin-top: 100px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .id2 {
+            position: absolute;
+            font-size: 60px;
+            margin-left: 100px;
+            margin-top: 170px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: black;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a:focus {
+            color: white;
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        nav ul li a:focus::after,
+        nav ul li a:hover::after {
+            content: ' ';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 36px;
+            background-color: black;
+            border-radius: 50px;
+            z-index: -1;
+        }
+
+        .divider {
+            width: 97%;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-left: 25px;
+        }
+
+        .full-width-image2 {
+            width: 100%;
+            height: auto;
+        }
+
+        .active {
+            color: black;
+            font-weight: bold;
+        }
+
+        .works-content {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .works-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 1s ease-out, opacity 1s ease-out;
+        }
+
+        .works-image.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="index.html">oneseventytwo</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="works.html" class="active">Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="designers.html">Designers</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="divider"></div>
+    <div class="id">Industrial Design</div>
+    <div class="id2">Project Group</div>
+    <main>
+        <div class="works-content">
+            <img src="works1.png" alt="Work Sample 1" class="works-image">
+            <img src="works2.png" alt="Work Sample 2" class="works-image">
+            <img src="works3.png" alt="Work Sample 3" class="works-image">
+        </div>
+    </main>
+    <footer>
+        <img src="bottom.jpg" alt="oneseventytwoinformation" class="full-width-image2">
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".works-image");
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            images.forEach(image => {
+                observer.observe(image);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works - oneseventytwo</title>
+
+    <style type="text/css">
+        @font-face {
+            font-family: 'SUIT-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'SUIT-Regular', sans-serif;
+            background-color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            color: black;
+            white-space: nowrap;
+        }
+
+        .logo a {
+            font-size: 24px;
+            text-decoration: none;
+            color: black;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: black;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a:focus,
+        nav ul li a.active {
+            color: white;
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        nav ul li a:focus::after,
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            content: ' ';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 36px;
+            background-color: black;
+            border-radius: 50px;
+            z-index: -1;
+        }
+
+        .divider {
+            width: 97%;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-left: 25px;
+        }
+
+        .works {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: normal;
+            margin-top: 70px;
+            letter-spacing: 1px;
+        }
+
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            color: gray;
+            background-color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .button-group button.active {
+            text-decoration: none;
+            color: black;
+        }
+
+        .box {
+            background-color: #f7f7f7;
+            padding: 5px 0;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .box-buttons {
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .box-buttons button {
+            font-size: 18px;
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            color: gray;
+            background-color: #f7f7f7;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .box-buttons button.active {
+            color: black;
+        }
+
+        .image-display {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .full-width-image2 {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="index.html">oneseventytwo</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="works.html" class="active">Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="designers.html">Designers</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="divider"></div>
+
+    <main>
+        <div class="works-content">
+            <h1 class="works">Works</h1>
+            <div class="button-group">
+                <button class="active" onclick="selectCategory('workshop')">Workshop</button>
+                <button onclick="selectCategory('project')">Project</button>
+            </div>
+            <div class="box" id="box">
+                <div class="box-buttons">
+                    <button class="active" onclick="showImage('all')">All</button>
+                    <button onclick="showImage('onomatopoeia')">의성어.의태어</button>
+                    <button onclick="showImage('favorite')">내가 좋아하는 공간</button>
+                </div>
+            </div>
+            <div class="image-display">
+                <img id="display-image" src="all.png" alt="All Works" style="width: 80%; height: auto;">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <img src="bottom.jpg" alt="oneseventytwoinformation" class="full-width-image2">
+    </footer>
+
+    <script>
+        function selectCategory(category) {
+            const buttons = document.querySelectorAll('.button-group button');
+            buttons.forEach(button => button.classList.remove('active'));
+            document.querySelector(`.button-group button[onclick="selectCategory('${category}')"]`).classList.add('active');
+
+            const box = document.getElementById('box');
+            const displayImage = document.getElementById('display-image');
+
+            if (category === 'project') {
+                // Hide the buttons box and display image3
+                box.style.display = 'none';
+                displayImage.src = 'image3.png';
+                displayImage.alt = 'Project Works';
+            } else {
+                // Show the buttons box and set default image
+                box.style.display = 'block';
+                showImage('all');
+            }
+        }
+
+        function showImage(type) {
+            const buttons = document.querySelectorAll('.box-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            const button = document.querySelector(`.box-buttons button[onclick="showImage('${type}')"]`);
+            if (button) {
+                button.classList.add('active');
+            }
+
+            const displayImage = document.getElementById('display-image');
+            if (type === 'all') {
+                displayImage.src = 'all.png';
+                displayImage.alt = 'All Works';
+            } else if (type === 'onomatopoeia') {
+                displayImage.src = 'image1.png';
+                displayImage.alt = '의성어.의태어';
+            } else if (type === 'favorite') {
+                displayImage.src = 'image2.png';
+                displayImage.alt = '내가 좋아하는 공간';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

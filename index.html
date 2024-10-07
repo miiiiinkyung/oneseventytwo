@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oneseventytwo - Home</title>
+
+    <style type="text/css">
+        @font-face {
+            font-family: 'SUIT-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'SUIT-Regular', sans-serif;
+            background-color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            color: black;
+            white-space: nowrap;
+        }
+
+        .logo {
+            font-size: 24px;
+        }
+
+        .id {
+            position: absolute;
+            font-size: 60px;
+            margin-left: 100px;
+            margin-top: 80px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .group {
+            position: absolute;
+            font-size: 60px;
+            margin-left: 100px;
+            margin-top: 160px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .dynamic-text-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            height: 75px; /* 텍스트 높이보다 약간 더 넉넉하게 설정 */
+            width: 260px; /* 넉넉하게 고정된 너비 설정 */
+            margin: 0 40px; /* 괄호와의 간격 조정 */
+            line-height: 75px; /* 텍스트가 가운데 오도록 조정 */
+            vertical-align: middle; /* 가운데 정렬 */
+            position: relative;
+        }
+
+        .dynamic-text {
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: slide-up 3s infinite;
+        }
+
+        @keyframes slide-up {
+            0% {
+                transform: translate(-50%, 100%);
+            }
+            25%, 75% {
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                transform: translate(-50%, -150%);
+            }
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: black;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a:focus {
+            color: white;
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        nav ul li a:focus::after,
+        nav ul li a:hover::after {
+            content: ' ';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 36px;
+            background-color: black;
+            border-radius: 50px;
+            z-index: -1;
+        }
+
+        .full-width-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .full-width-image2{
+            width: 100%;
+        }
+
+        .divider {
+            width: 97%;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-left: 25px;
+        }
+
+        .blinking-dot {
+            width: 10px;
+            height: 10px;
+            background-color: orange;
+            border-radius: 50%;
+            animation: blink 1s infinite alternate;
+            margin-left: 720px;
+            margin-top: 180px;
+            position: absolute;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="index.html" style="color: black; text-decoration: none;">oneseventytwo</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="works.html">Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="designers.html">Designers</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="divider"></div>
+    <div class="id">Industrial Design</div>
+    <div class="blinking-dot"></div>
+    <div class="group">( 
+        <span class="dynamic-text-wrapper">
+            <span class="dynamic-text" id="dynamicText">Project</span>
+        </span> 
+        ) Group
+    </div>
+
+    <footer>
+        <img src="oneseventytwo.jpg" alt="oneseventytwo" class="full-width-image">
+        <img src="bottom.jpg" alt="oneseventytwoinformation" class="full-width-image2">
+    </footer>
+
+    <script>
+        const texts = ["Project", "Modeling", "Study"];
+        let index = 0;
+
+        function changeText() {
+            const dynamicText = document.getElementById("dynamicText");
+            dynamicText.textContent = texts[index];
+            index = (index + 1) % texts.length; // 순환하면서 인덱스 변경
+        }
+
+        setInterval(changeText, 3000); // 3초마다 텍스트 변경
+    </script>
+</body>
+</html>
+
+
